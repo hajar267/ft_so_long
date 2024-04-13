@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/11 15:17:04 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/13 14:52:42 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,15 @@
 //     int 
 // }
 
-int check_for_C()
+void flood_fill(char **map, int y, int x)
 {
-    
+    if (map[y][x] == 1)
+        return;
+    map[y][x] = 'F';
+    flood_fill(map, y - 1, x);
+    flood_fill(map, y + 1, x);
+    flood_fill(map, y, x + 1);
+    flood_fill(map, y, x - 1);
 }
 
 int check_rectangle_map(char **map)
