@@ -6,12 +6,11 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/13 14:52:42 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/26 19:55:03 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
-
+#include "so_long.h"
 // struct myvalues {
 //     int fd;
 //     int i;
@@ -29,37 +28,42 @@ void flood_fill(char **map, int y, int x)
     flood_fill(map, y, x - 1);
 }
 
-int check_rectangle_map(char **map)
+void checker(char **map, int fd)
 {
-    int i = ft_strlen((const char)map[0]);
-    int j = get_numline_map();
-    if (i == j)
-        return(0);
-    return(1);
+    check_map_shape(map, fd);
+    check_map_content(map, fd);
+    check_map_wall(map, fd);
 }
 
-int check_map_shape(char **map)
+void check_map_shape(char **map, int fd)
 {
-    int j = get_numline_map();
+    int j = get_numline_map(fd);
     int i= ft_strlen((const char)map[0]);
+    if (j == i)
+    {
+        perror("error invalid map");
+        exit(0);
+    }
     while(j > 0)
     {
         if (i != ft_strlen((const char)map[j -1]))
-            return (0);
+        {
+            perror("error invalid map");
+            exit(0);
+        }
         j--;
     }
-    return(1);
 }
 
-int check_map_content(char **map)
+void check_map_content(char **map, int fd)
 {
     int compt_E = 0;
     int compt_C = 0;
     int compt_P = 0;
     int x = 1;
     int y;
-    int j = get_numline_map();
-    int len = ft_strlen((const char)map[0]);
+    int j = get_numline_map(fd) - 1;
+    int len = ft_strlen((const char)map[0]) - 1;
     while(j - 1 > 0)
     {
         y = 1;
@@ -72,45 +76,53 @@ int check_map_content(char **map)
             else if (map[x][y] == 'P')
                 compt_P++;
             else if (map[x][y] != '0' && map[x][y] != '1')
-                return(0);
+            {
+                perror("error somthing stranger hmmm!!! ");
+                exit(0);
+            }
             y++;
             len--;
         }
-        if (compt_E != 1 || compt_P != 1 || compt_C <= 1)
-            return(0);
+        if (compt_E != 1 || compt_P != 1 || compt_C < 1)
+        {
+            perror("error more than E || P or less than one C !!!");
+            exit(0);
+        }
         x++;
         j--;
     }
-    return (1);
 }
 
-int check_map_wall(char **map)
+void check_map_wall(int fd, char **map)  //struct as a parametre
 {
     int i =0;
     int len = ft_strlen((const char)map[0]);
-    int j = get_numline_map();
+    int j = get_numline_map(fd);
     while(map[0][i] && map[j-1][i])
     {
         if(map[0][i] != '1' || map[j-1][i] != '1')
-            return (0);
+        {
+            perror("error!!!");
+            exit(0);
+        }
         i++;
     }
     i =0;
     while(j > 0)
     {
-        if (map[j][0] != '1' || map[j][len - 1] != '1');
-            return(0);
+        if (map[j][0] != '1' || map[j][len - 1] != '1')
+        {
+            perror("error!!!");
+            exit(0);
+        }
         j--;
     }
-    return(1);
 }
 
-int get_numline_map(void)
+int get_numline_map(int fd)
 {
-    int fd;
     int j=0;
     char *str;
-    fd = open("test", O_RDONLY);
     while((str = get_next_line(fd)))
     {
         j++;
@@ -120,16 +132,14 @@ int get_numline_map(void)
     return(j);
 }
 
-char **map_to_2d(void)
+void map_to_2d(int fd)
 {
-    int fd;
     int j;
     int x;
     int y=0;
     char *str;
     char **map;
-    j = get_numline_map();
-    fd = open("test", O_RDONLY);
+    j = get_numline_map(fd);
     map = malloc(sizeof(char *) * (j + 1));
     while(j > y)
     {
@@ -146,17 +156,42 @@ char **map_to_2d(void)
         y++;
     }
     map[j] = NULL;
-    return(map);
 }
 
-int main()
+void check_file_name(char *name)
 {
-    char **str = map_to_2d();
-    int i=0;
-    while(str[i])
+    int i = 0;
+    while(name[i])
     {
-        printf("%s\n",str[i]);
-        i++;
+        if (name[i] == '.' && name[i + 1] == 'b' 
+        && name[i + 2] == 'e' && name[i + 3] == 'r');
+            return ;
     }
-    
+    perror("correct file's name haaa!!!");
+    exit(0);
+}
+
+int main(int ac, char **av)
+{
+    char **map; // struct
+    int fd;
+    void *mlx_ptr;
+    void *win_ptr;
+    if (ac == 1)
+    {
+        perror("at least one map !!!");
+        exit(0);
+    }
+    if (ac > 2)
+    {
+        perror("one map please !!!");
+        exit(0);
+    }
+    check_file_name(av[1]);
+    fd = open(av[1], O_RDONLY);
+    map_to_2d(fd);
+    checker(map, fd);
+    mlx_ptr = mlx_init();
+    win_ptr = mlx_new_window(mlx_ptr, 1000, 800, "My Window");
+    mlx_loop(mlx_ptr);
 }
