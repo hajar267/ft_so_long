@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:15:33 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/11 10:53:55 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/27 18:55:04 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<limits.h>
+#include<mlx.h>
 
 char	*ft_strchr(const char *s, int c);
 char    *gal(char *full_line);
