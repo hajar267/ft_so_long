@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/28 13:04:22 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/29 21:34:58 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,28 @@ void map_to_2d(t_var    *vars, int fd)
     int x;
     int y=0;
     char *str;
+    char **map;
     j = get_numline_map(vars, fd);
-    vars->map = malloc(sizeof(char *) * (j + 1));
+    map = malloc(sizeof(char *) * (j + 1));
     printf("hhh1\n");
     while(j > y)
     {
+        printf("%d\n", j);
+        printf("%d\n", y);
         str = get_next_line(fd);
-        vars->map[y] = malloc(ft_strlen(str) + 1);
+        map[y] = malloc(ft_strlen(str) + 1);
+        printf("hhh2\n");
         x = 0;
         while(str[x] != '\n' && str[x])
         {
-            vars->map[y][x] = str[x];
+            map[y][x] = str[x];
             x++;
         }
-        vars->map[y][x] = '\0';
+        map[y][x] = '\0';
         free(str);
         y++;
     }
-    vars->map[j] = NULL;
+    map[j] = NULL;
 }
 
 void check_file_name(char *name)
