@@ -6,49 +6,56 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/29 21:34:58 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:54:33 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int get_numline_map(t_var   *vars, int fd)
+int get_numline_map(char *name)
 {
     int j=0;
+    int fd;
     char *str;
+    fd = open(name, O_RDONLY);
     while((str = get_next_line(fd)))
     {
         j++;
         free(str);
     }
+    close(fd);
     free(str);
     return(j);
 }
 
-void checker(t_var  *vars, int fd)
+void checker(char **map, char *name)
 {
-    check_map_shape(vars, fd);
-    check_map_content(vars, fd);
-    check_map_wall(vars, fd);
+    check_start_map(name);
+    check_map_shape(map, name);
+    check_map_content(map, name);
+    check_map_wall(map, name);
+    
 }
 
-void map_to_2d(t_var    *vars, int fd)
+char **map_to_2d(char *name)
 {
     int j;
     int x;
+    int fd;
     int y=0;
     char *str;
     char **map;
-    j = get_numline_map(vars, fd);
+    j = get_numline_map(name);
+    fd = open(name, O_RDONLY);
     map = malloc(sizeof(char *) * (j + 1));
-    printf("hhh1\n");
     while(j > y)
     {
-        printf("%d\n", j);
-        printf("%d\n", y);
         str = get_next_line(fd);
+        if (!str)
+        {
+            break;
+        }
         map[y] = malloc(ft_strlen(str) + 1);
-        printf("hhh2\n");
         x = 0;
         while(str[x] != '\n' && str[x])
         {
@@ -60,6 +67,8 @@ void map_to_2d(t_var    *vars, int fd)
         y++;
     }
     map[j] = NULL;
+    close(fd);
+    return(map);
 }
 
 void check_file_name(char *name)
@@ -76,10 +85,29 @@ void check_file_name(char *name)
     exit(0);
 }
 
+void check_for_fill(char **map, int rows, int cols)
+{
+    int *t;
+    t = get_player_position(map);
+    flood_fill(map,t[0],t[1], rows, cols);
+    check_for_c(map);
+}
+
+void check_for_fill_copy(char **map_copy, int rows, int cols)
+{
+    int *t_copy;
+    
+    t_copy = get_Exit_position(map_copy);
+    flood_fill_copy(map_copy, t_copy[0], t_copy[1], rows, cols);
+    check_for_E_copy(map_copy);
+}
+
 int main(int ac, char **av)
 {
-    t_var   *vars;
-    int fd;
+    char **map;
+    char **map_copy;
+    int rows;
+    int cols;
     if (ac == 1)
     {
         perror("at least one map !!!");
@@ -91,14 +119,13 @@ int main(int ac, char **av)
         exit(0);
     }
     check_file_name(av[1]);
-    fd = open(av[1], O_RDONLY);
-    map_to_2d(vars, fd);
-    printf("hhh\n");
-    checker(vars, fd);
-    t_var   *my_vars;
-    my_vars = malloc(sizeof(t_var ));
-    if (!my_vars)
-        return(0);
+    map = map_to_2d(av[1]);
+    checker(map, av[1]);
+    rows = get_numline_map(av[1]);
+    cols = ft_strlen(map[0]);
+    map_copy = get_map_copy(map, rows, cols);
+    check_for_fill(map, rows, cols);
+    check_for_fill(map_copy, rows, cols);
     // vars->mlx_ptr = mlx_init();
     // if (!vars->mlx_ptr)
     //     return(0);

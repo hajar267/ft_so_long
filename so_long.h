@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/28 12:59:45 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:54:59 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,21 +36,23 @@ typedef struct s_var
     void *img_ptr;
 }t_var;
 
-int get_numline_map(t_var   *vars, int fd);
+int get_numline_map(char *name);
 void check_file_name(char *name);
-void check_map_shape(t_var  *vars, int fd);
-void check_map_content(t_var    *vars, int fd);
-void check_map_wall(t_var   *vars, int fd);
-void checker(t_var  *vars, int fd);
-void map_to_2d(t_var    *vars, int fd);
-void check_start_map(t_var  *vars, int fd);
+void check_map_shape(char **map, char *name);
+void check_map_content(char **map, char *name);
+void check_map_wall(char **map, char *name);
+void checker(char **map, char *name);
+char **map_to_2d(char *name);
+void check_start_map(char *name);
 void check_file_name(char *name);
-void flood_fill_copy(t_var   *vars, int y, int x);
-void check_for_c_copy(t_var    *vars);
-void get_Exit_position(t_var  *vars);
-void get_map_copy(t_var *vars);
-void flood_fill(t_var   *vars, int y, int x);
-void check_for_c(t_var    *vars);
-void get_player_position(t_var  *vars);
+void flood_fill_copy(char **map_copy, int y, int x, int rows, int cols);
+void check_for_E_copy(char **map_copy);
+int *get_Exit_position(char **map_copy);
+char **get_map_copy(char **map, int rows, int cols);
+void flood_fill(char **map, int y, int x, int rows, int cols);
+void check_for_c(char **map);
+int *get_player_position(char **map);
+void check_for_fill(char **map, int rows, int cols);
+void check_for_fill_copy(char **map_copy, int rows, int cols);
 
 #endif

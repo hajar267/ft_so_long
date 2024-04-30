@@ -6,76 +6,85 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:38:52 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/28 12:40:36 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/30 15:50:21 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void get_map_copy(t_var *vars)
+char **get_map_copy(char **map, int rows, int cols)
 {
+    char **map_copy;
     int i;
     int j;
     j = 0;
-    while(vars->map[j])
+    map_copy = malloc(sizeof(char *) * (rows + 1));
+    while(map[j])
     {
+        map_copy[j] = malloc(cols + 1);
         i = 0;
-        while(vars->map[j][i])
+        while(map[j][i])
         {
-            vars->map_copy[j][i] = vars->map[j][i];
+            map_copy[j][i] = map[j][i];
             i++;
         }
-        vars->map_copy[j][i] = '\0';
+        map_copy[j][i] = '\0';
         j++;
     }
-    vars->map_copy[j] = NULL;
+    map_copy[j] = NULL;
+    return(map_copy);
 }
 
-void get_Exit_position(t_var  *vars)
+int *get_Exit_position(char **map_copy)
 {
+    int *t_copy;
     int i;
     int j;
     j = 0;
-    while(vars->map[j])
+    t_copy = malloc(sizeof(int) * 2);
+    while(map_copy[j])
     {
         i = 0;
-        while(vars->map[j][i])
+        while(map_copy[j][i])
         {
-            if (vars->map[j][i] == 'E')
+            if (map_copy[j][i] == 'E')
             {
-                vars->y_player = j;
-                vars->x_player = i;
+                t_copy[0] = j;
+                t_copy[1] = i;
             }
             i++;
         }
         j++;
     }
+    return(t_copy);
 }
 
-void flood_fill_copy(t_var   *vars, int y, int x)
+void flood_fill_copy(char **map_copy, int y, int x, int rows, int cols)
 {
-    if (vars->map_copy[y][x] == '1')
+    if (y < 0 || y >= rows || x < 0 || x >= cols)
+        return ;
+    if (map_copy[y][x] == '1' || map_copy[y][x] == 'F')
         return;
-    vars->map_copy[y][x] = 'F';
-    flood_fill_copy(vars, y - 1, x);
-    flood_fill_copy(vars, y + 1, x);
-    flood_fill_copy(vars, y, x + 1);
-    flood_fill_copy(vars, y, x - 1);
+    map_copy[y][x] = 'F';
+    flood_fill_copy(map_copy, y - 1, x, rows, cols);
+    flood_fill_copy(map_copy, y + 1, x, rows, cols);
+    flood_fill_copy(map_copy, y, x + 1, rows, cols);
+    flood_fill_copy(map_copy, y, x - 1, rows, cols);
 }
 
-void check_for_c_copy(t_var    *vars)
+void check_for_E_copy(char **map_copy)
 {
     int j;
     int i;
     j = 0;
-    while(vars->map_copy[j])
+    while(map_copy[j])
     {
         i = 0;
-        while(vars->map_copy[j][i])
+        while(map_copy[j][i])
         {
-            if (vars->map_copy[j][i] == 'C')
+            if (map_copy[j][i] == 'c' || map_copy[j][i] == 'P')
             {
-                perror("error rest c !!!");
+                perror("error rest c || p!!!");
                 exit(0);
             }
             i++;
@@ -83,5 +92,3 @@ void check_for_c_copy(t_var    *vars)
         j++;
     }
 }
-
-
