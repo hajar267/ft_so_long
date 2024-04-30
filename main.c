@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/30 15:54:33 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/04/30 16:23:26 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,9 @@ void check_for_fill_copy(char **map_copy, int rows, int cols)
 
 int main(int ac, char **av)
 {
+    void *mlx_ptr;
+    void *win_ptr;
+    void *img_ptr;
     char **map;
     char **map_copy;
     int rows;
@@ -126,10 +129,10 @@ int main(int ac, char **av)
     map_copy = get_map_copy(map, rows, cols);
     check_for_fill(map, rows, cols);
     check_for_fill(map_copy, rows, cols);
-    // vars->mlx_ptr = mlx_init();
-    // if (!vars->mlx_ptr)
+    mlx_ptr = mlx_init();
+    // if (mlx_ptr)
     //     return(0);
-    // vars->win_ptr = mlx_new_window(vars->mlx_ptr, 1000, 800, "My Window");
-    // vars->img_ptr = mlx_new_image(vars->mlx_ptr, 1920, 1080);
-    // mlx_loop(vars->mlx_ptr);
+    win_ptr = mlx_new_window(mlx_ptr, 1000, 800, "My Window");
+    // img_ptr = mlx_new_image(mlx_ptr, 1920, 1080);
+    mlx_loop(mlx_ptr);
 }
