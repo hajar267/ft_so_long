@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/30 15:54:59 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/03 18:17:34 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,14 @@
 #include<unistd.h>
 #include<fcntl.h>
 #include<mlx.h>
+
+#ifndef SIZE_l
+#define SIZE_l 100
+#endif
+
+#ifndef SIZE_w
+#define SIZE_w 75
+#endif
 
 typedef struct s_var
 {
@@ -54,5 +62,6 @@ void check_for_c(char **map);
 int *get_player_position(char **map);
 void check_for_fill(char **map, int rows, int cols);
 void check_for_fill_copy(char **map_copy, int rows, int cols);
+void wall_map(char **map, void *mlx_ptr, void *img_ptr, void *win_ptr, int cols, int rows);
 
 #endif

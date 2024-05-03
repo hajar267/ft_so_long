@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/02 15:30:44 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/03 19:23:51 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,6 @@ void checker(char **map, char *name)
     check_map_shape(map, name);
     check_map_content(map, name);
     check_map_wall(map, name);
-    
 }
 
 char **map_to_2d(char *name)
@@ -102,14 +101,21 @@ void check_for_fill_copy(char **map_copy, int rows, int cols)
     check_for_E_copy(map_copy);
 }
 
+int key_hook(int keycode, void *param) {
+    // (void)data;
+    printf("hello world %d", keycode);
+    return 0;
+}
+
 int main(int ac, char **av)
 {
     void *mlx_ptr;
     void *win_ptr;
     void *img_ptr;
-    char *file_name = "./wall_cnvrt.xpm";
+    char *file_name = "./character.xpm";
     char **map;
     char **map_copy;
+    char **map_copy_1;
     int rows;
     int cols;
     int x;
@@ -130,17 +136,20 @@ int main(int ac, char **av)
     rows = get_numline_map(av[1]);
     cols = ft_strlen(map[0]);
     map_copy = get_map_copy(map, rows, cols);
+    map_copy_1 = get_map_copy(map, rows, cols);
     check_for_fill(map, rows, cols);
     check_for_fill(map_copy, rows, cols);
     mlx_ptr = mlx_init();
-    // if (mlx_ptr)
-    //     return(0);
-    img_ptr = mlx_xpm_file_to_image(mlx_ptr, file_name, &y, &x);
-    if (!img_ptr)
-        return(0);
-    win_ptr = mlx_new_window(mlx_ptr, 1000, 800, "My Window");
-    // img_ptr = mlx_new_image(mlx_ptr, 1000, 800);
-    mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 0, 0);
+    win_ptr = mlx_new_window(mlx_ptr, SIZE_l * cols, SIZE_w * rows, "My Window");
+    wall_map(map_copy_1, mlx_ptr, img_ptr, win_ptr, cols, rows);
+    mlx_hook(win_ptr, 2, 0, &key_hook, NULL);
+    // img_ptr = mlx_xpm_file_to_image(mlx_ptr, file_name, &y, &x);
+    // // if (!img_ptr)
+    // //     return(0);
+    // win_ptr = mlx_new_window(mlx_ptr, SIZE_l * cols, SIZE_w * rows, "My Window");
+    // // img_ptr = mlx_new_image(mlx_ptr, 1000, 800);
+    // mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 100, 75);
     
     mlx_loop(mlx_ptr);
 }
+
