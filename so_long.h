@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/03 18:17:34 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/05 16:37:15 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct s_var
     int lenght;
     char **map;
     char **map_copy;
-    void *mlx_ptr;
+    void *mlx_ptr ;
     void *win_ptr;
     void *img_ptr;
 }t_var;

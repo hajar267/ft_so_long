@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:15:21 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/03 18:18:41 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/05 16:35:04 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,3 +60,4 @@ void wall_map(char **map, void *mlx_ptr, void *img_ptr, void *win_ptr, int cols,
             j++;
         }
     }
+    

@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/03 19:23:51 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/05 16:34:13 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,9 @@ int key_hook(int keycode, void *param) {
 
 int main(int ac, char **av)
 {
+    t_var  vars;
+   
+    vars.mlx_ptr = NULL;
     void *mlx_ptr;
     void *win_ptr;
     void *img_ptr;
@@ -140,16 +143,11 @@ int main(int ac, char **av)
     check_for_fill(map, rows, cols);
     check_for_fill(map_copy, rows, cols);
     mlx_ptr = mlx_init();
+    if(!mlx_ptr)
+        return(0);
     win_ptr = mlx_new_window(mlx_ptr, SIZE_l * cols, SIZE_w * rows, "My Window");
     wall_map(map_copy_1, mlx_ptr, img_ptr, win_ptr, cols, rows);
-    mlx_hook(win_ptr, 2, 0, &key_hook, NULL);
-    // img_ptr = mlx_xpm_file_to_image(mlx_ptr, file_name, &y, &x);
-    // // if (!img_ptr)
-    // //     return(0);
-    // win_ptr = mlx_new_window(mlx_ptr, SIZE_l * cols, SIZE_w * rows, "My Window");
-    // // img_ptr = mlx_new_image(mlx_ptr, 1000, 800);
-    // mlx_put_image_to_window(mlx_ptr, win_ptr, img_ptr, 100, 75);
-    
+    // mlx_hook(win_ptr, 2, 0, &key_hook, NULL);
     mlx_loop(mlx_ptr);
+    
 }
-
