@@ -6,68 +6,67 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/05 16:34:13 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/06 12:28:22 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int get_numline_map(char *name)
+int get_numline_map(t_game vars, char *name)
 {
     int j=0;
-    int fd;
     char *str;
-    fd = open(name, O_RDONLY);
-    while((str = get_next_line(fd)))
+    vars.fd = open(name, O_RDONLY);
+    while((str = get_next_line(vars.fd)))
     {
         j++;
         free(str);
     }
-    close(fd);
+    close(vars.fd);
     free(str);
     return(j);
 }
 
-void checker(char **map, char *name)
+void checker(t_game var, char *name)
 {
-    check_start_map(name);
-    check_map_shape(map, name);
-    check_map_content(map, name);
-    check_map_wall(map, name);
+    check_start_game(var, name);
+    check_map_shape(var, name);
+    check_map_content(&var, name);
+    check_map_wall(var, name);
 }
 
-char **map_to_2d(char *name)
+char **map_to_2d(char *name, t_game vars)
 {
     int j;
     int x;
-    int fd;
-    int y=0;
+    int y;
     char *str;
-    char **map;
-    j = get_numline_map(name);
-    fd = open(name, O_RDONLY);
-    map = malloc(sizeof(char *) * (j + 1));
+    
+    y = 0;
+    j = get_numline_map(vars, name);
+    vars.fd = open(name, O_RDONLY);
+    vars.allocate_map = malloc(sizeof(char *) * (j + 1));
     while(j > y)
     {
-        str = get_next_line(fd);
+        str = get_next_line(vars.fd);
         if (!str)
         {
             break;
         }
-        map[y] = malloc(ft_strlen(str) + 1);
+        vars.allocate_map[y] = malloc(ft_strlen(str) + 1);
         x = 0;
         while(str[x] != '\n' && str[x])
         {
-            map[y][x] = str[x];
+            vars.allocate_map[y][x] = str[x];
             x++;
         }
-        map[y][x] = '\0';
+        vars.allocate_map[y][x] = '\0';
         free(str);
         y++;
     }
-    map[j] = NULL;
-    close(fd);
-    return(map);
+    vars.allocate_map[j] = NULL;
+    close(vars.fd);
+    return(vars.allocate_map);
 }
 
 void check_file_name(char *name)
@@ -84,12 +83,11 @@ void check_file_name(char *name)
     exit(0);
 }
 
-void check_for_fill(char **map, int rows, int cols)
+void check_for_fill(char **map, t_game vars)
 {
-    int *t;
-    t = get_player_position(map);
-    flood_fill(map,t[0],t[1], rows, cols);
-    check_for_c(map);
+    vars.t = get_player_position(vars);
+    flood_fill(vars,vars.t[0],vars.t[1]);
+    check_for_c(vars);
 }
 
 void check_for_fill_copy(char **map_copy, int rows, int cols)
@@ -109,45 +107,26 @@ int key_hook(int keycode, void *param) {
 
 int main(int ac, char **av)
 {
-    t_var  vars;
-   
-    vars.mlx_ptr = NULL;
-    void *mlx_ptr;
-    void *win_ptr;
-    void *img_ptr;
-    char *file_name = "./character.xpm";
-    char **map;
-    char **map_copy;
-    char **map_copy_1;
-    int rows;
-    int cols;
-    int x;
-    int y;
-    if (ac == 1)
+    t_game var;
+    if (ac != 2)
     {
-        perror("at least one map !!!");
-        exit(0);
-    }
-    if (ac > 2)
-    {
-        perror("one map please !!!");
+        perror("error!!!");
         exit(0);
     }
     check_file_name(av[1]);
-    map = map_to_2d(av[1]);
-    checker(map, av[1]);
-    rows = get_numline_map(av[1]);
-    cols = ft_strlen(map[0]);
-    map_copy = get_map_copy(map, rows, cols);
-    map_copy_1 = get_map_copy(map, rows, cols);
-    check_for_fill(map, rows, cols);
-    check_for_fill(map_copy, rows, cols);
-    mlx_ptr = mlx_init();
-    if(!mlx_ptr)
+    var.map = map_to_2d(av[1], var);
+    var.rows = get_numline_map(var, av[1]);
+    var.cols = ft_strlen(var.map[0]);
+    checker(var, av[1]);
+    var.map_copy = get_game_copy(var);
+    var.map_copy_1 = get_game_copy(var);
+    check_for_fill(var.map, var);
+    check_for_fill(var.map_copy, var);
+    var.mlx_ptr = mlx_init();
+    if(!var.mlx_ptr)
         return(0);
-    win_ptr = mlx_new_window(mlx_ptr, SIZE_l * cols, SIZE_w * rows, "My Window");
-    wall_map(map_copy_1, mlx_ptr, img_ptr, win_ptr, cols, rows);
-    // mlx_hook(win_ptr, 2, 0, &key_hook, NULL);
-    mlx_loop(mlx_ptr);
+    var.win_ptr = mlx_new_window(var.mlx_ptr, SIZE_l * var.cols, SIZE_w * var.rows, "My Window");
+    wall_map(var);
+    mlx_loop(var.mlx_ptr);
     
 }

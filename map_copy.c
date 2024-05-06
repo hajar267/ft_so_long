@@ -6,26 +6,26 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:38:52 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/04/30 15:50:21 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/06 11:33:47 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-char **get_map_copy(char **map, int rows, int cols)
+char **get_game_copy(t_game var)
 {
     char **map_copy;
     int i;
     int j;
     j = 0;
-    map_copy = malloc(sizeof(char *) * (rows + 1));
-    while(map[j])
+    map_copy = malloc(sizeof(char *) * (var.rows + 1));
+    while(var.map[j])
     {
-        map_copy[j] = malloc(cols + 1);
+        map_copy[j] = malloc(var.cols + 1);
         i = 0;
-        while(map[j][i])
+        while(var.map[j][i])
         {
-            map_copy[j][i] = map[j][i];
+            map_copy[j][i] = var.map[j][i];
             i++;
         }
         map_copy[j][i] = '\0';
