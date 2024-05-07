@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:15:21 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/06 13:57:24 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/06 13:58:38 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void wall_map(t_game var)
             i = 0;
             while(var.map_copy_1[j][i])
             {
-                if (var.map_copy_1[j][i] == '1' || var.map_copy_1[j][i] == 'P' || var.map_copy_1[j][i] == '0' || var.map_copy_1[j][i] == 'E')
+                if (var.map_copy_1[j][i] == '1' || var.map_copy_1[j][i] == 'P' || var.map_copy_1[j][i] == '0' 
+                || var.map_copy_1[j][i] == 'E')
                     state_map_wall(var, i, j, l, w);
                 else if (var.map_copy_1[j][i] == 'c')
                 {

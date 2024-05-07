@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/06 12:26:49 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/07 22:39:47 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,9 @@ int *get_player_position(t_game vars);
 void check_for_fill(char **map, t_game vars);
 void check_for_fill_copy(char **map_copy, int rows, int cols);
 void wall_map(t_game var);
+void to_x_plus_1(t_game *vars);
+void to_x_minus_1(t_game *vars);
+void to_y_plus_1(t_game *vars);
+void to_y_minus_1(t_game *vars);
 
 #endif

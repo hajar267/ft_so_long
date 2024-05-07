@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/06 12:28:22 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/07 22:39:29 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,11 +98,17 @@ void check_for_fill_copy(char **map_copy, int rows, int cols)
     flood_fill_copy(map_copy, t_copy[0], t_copy[1], rows, cols);
     check_for_E_copy(map_copy);
 }
-
-int key_hook(int keycode, void *param) {
-    // (void)data;
-    printf("hello world %d", keycode);
-    return 0;
+int	key_hook(int keycode, t_game *vars)
+{
+    if (keycode == 124 || keycode == 2)
+        to_x_plus_1(vars);
+    else if (keycode == 123 || keycode == 0)
+        to_x_minus_1(vars);
+    else if (keycode == 125 || keycode == 1)
+        to_y_plus_1(vars);
+    else if (keycode == 126 || keycode == 13)
+        to_y_minus_1(vars);
+	return (0);
 }
 
 int main(int ac, char **av)
@@ -127,6 +133,7 @@ int main(int ac, char **av)
         return(0);
     var.win_ptr = mlx_new_window(var.mlx_ptr, SIZE_l * var.cols, SIZE_w * var.rows, "My Window");
     wall_map(var);
+    mlx_key_hook(var.win_ptr, key_hook, &var);
     mlx_loop(var.mlx_ptr);
     
 }
