@@ -6,33 +6,35 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:49:58 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/06 12:07:21 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/08 10:10:08 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-int *get_player_position(t_game vars)
+int *get_player_position(char **map)
 {
-    vars.t = malloc(sizeof(int) * 2);
+    int *t;
+
+    t = malloc(sizeof(int) * 2);
     int i;
     int j;
     j = 0;
-    while(vars.map[j])
+    while(map[j])
     {
         i = 0;
-        while(vars.map[j][i])
+        while(map[j][i])
         {
-            if (vars.map[j][i] == 'P')
+            if (map[j][i] == 'P')
             {
-                vars.t[0] = j;
-                vars.t[1] = i;
+                t[0] = j;
+                t[1] = i;
             }
             i++;
         }
         j++;
     }
-    return(vars.t);
+    return(t);
 }
 
 void flood_fill(t_game vars, int y, int x)

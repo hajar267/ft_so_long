@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/07 22:39:47 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/08 10:49:05 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,6 @@
 #define SIZE_w 75
 #endif
 
-
-
 typedef struct s_game
 {
     void *mlx_ptr;
@@ -47,6 +45,8 @@ typedef struct s_game
     int compt_C;
    int compt_E;
    int compt_P;
+   int player_x;
+   int player_y;
 }t_game;
 
 
@@ -65,7 +65,7 @@ int *get_Exit_position(char **map_copy);
 char **get_game_copy(t_game var);
 void flood_fill(t_game vars, int y, int x);
 void check_for_c(t_game vars);
-int *get_player_position(t_game vars);
+int *get_player_position(char **map);
 void check_for_fill(char **map, t_game vars);
 void check_for_fill_copy(char **map_copy, int rows, int cols);
 void wall_map(t_game var);

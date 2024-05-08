@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/07 22:39:29 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/08 10:49:09 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,9 @@ void check_file_name(char *name)
 
 void check_for_fill(char **map, t_game vars)
 {
-    vars.t = get_player_position(vars);
-    flood_fill(vars,vars.t[0],vars.t[1]);
+    int *t;
+    t = get_player_position(map);
+    flood_fill(vars,t[0],t[1]);
     check_for_c(vars);
 }
 
@@ -113,6 +114,8 @@ int	key_hook(int keycode, t_game *vars)
 
 int main(int ac, char **av)
 {
+    static int player_x ;
+    static int player_y ;
     t_game var;
     if (ac != 2)
     {
@@ -126,8 +129,11 @@ int main(int ac, char **av)
     checker(var, av[1]);
     var.map_copy = get_game_copy(var);
     var.map_copy_1 = get_game_copy(var);
+    var.t = get_player_position(var.map_copy_1);
     check_for_fill(var.map, var);
     check_for_fill(var.map_copy, var);
+    var.player_x = var.t[0];
+    var.player_y = var.t[1];
     var.mlx_ptr = mlx_init();
     if(!var.mlx_ptr)
         return(0);
