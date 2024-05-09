@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:52:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/06 12:31:21 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/09 10:34:41 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ void check_map_shape(t_game var, char *name)
     {
         if (i != ft_strlen(var.map[j -1]))
         {
+            printf("%d--%zu\n", i, ft_strlen(var.map[j -1]));
             perror("error invalid map");
             exit(0);
         }

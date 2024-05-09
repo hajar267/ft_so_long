@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/08 10:49:05 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/09 10:57:25 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ typedef struct s_game
    int compt_P;
    int player_x;
    int player_y;
+   int player_moves;
 }t_game;
 
 
@@ -73,5 +74,8 @@ void to_x_plus_1(t_game *vars);
 void to_x_minus_1(t_game *vars);
 void to_y_plus_1(t_game *vars);
 void to_y_minus_1(t_game *vars);
+void	ft_putnbr_fd(int n, int fd);
+void	ft_putstr_fd(char *s, int fd);
+void	ft_putchar_fd(char c, int fd);
 
 #endif

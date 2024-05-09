@@ -6,11 +6,18 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/08 10:49:09 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/09 18:44:34 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+
+
+int kill_redcross(int keycode, t_game * var)
+{
+    (void)keycode;
+    exit(0);
+}
 
 int get_numline_map(t_game vars, char *name)
 {
@@ -109,17 +116,17 @@ int	key_hook(int keycode, t_game *vars)
         to_y_plus_1(vars);
     else if (keycode == 126 || keycode == 13)
         to_y_minus_1(vars);
+    else if (keycode == 53)
+        exit(0);
 	return (0);
 }
 
 int main(int ac, char **av)
 {
-    static int player_x ;
-    static int player_y ;
     t_game var;
     if (ac != 2)
     {
-        perror("error!!!");
+        ft_putstr_fd("Error", 2);
         exit(0);
     }
     check_file_name(av[1]);
@@ -134,12 +141,17 @@ int main(int ac, char **av)
     check_for_fill(var.map_copy, var);
     var.player_x = var.t[0];
     var.player_y = var.t[1];
+    ft_main(var, av[1]);
+    printf("%d--%d--", var.player_x, var.player_y);
     var.mlx_ptr = mlx_init();
     if(!var.mlx_ptr)
         return(0);
     var.win_ptr = mlx_new_window(var.mlx_ptr, SIZE_l * var.cols, SIZE_w * var.rows, "My Window");
     wall_map(var);
-    mlx_key_hook(var.win_ptr, key_hook, &var);
+    var.map_copy_1[var.player_x][var.player_y] = '0';
+    var.player_moves = 0;
+    mlx_hook(var.win_ptr, 17, 0, kill_redcross, &var);
+    mlx_hook(var.win_ptr, 2, 0, key_hook, &var);
     mlx_loop(var.mlx_ptr);
     
 }
