@@ -6,16 +6,12 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:18:23 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/06 11:59:57 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/10 21:31:07 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-void    lk()
-{
-    system("leaks a.out");
-}
 
 char	*ft_strchr(const char *s, int c)
 {

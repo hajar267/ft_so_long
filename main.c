@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/10 14:39:21 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/10 21:42:41 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,13 +77,20 @@ void to_initialized(t_game *var, char *name)
     (*var).map_copy = get_game_copy(*var);
     (*var).map_copy_1 = get_game_copy(*var);
     check_for_fill((*var).map, *var);
-    check_for_fill((*var).map_copy, *var);
+    check_for_fill_copy((*var).map_copy, *var);
 }
 int scor(void *param)
 {
     t_game *var = (t_game*) param;
-    mlx_string_put(var->mlx_ptr, var->win_ptr,0,0,0xFFFF0000, "HIHIH");
+     
     return(0);
+}
+
+
+
+void    lk()
+{
+    system("leaks parse");
 }
 
 int main(int ac, char **av)
@@ -94,11 +101,15 @@ int main(int ac, char **av)
         ft_putstr_fd("Error", 2);
         exit(0);
     }
+    atexit(lk);
     check_file_name(av[1]);
     to_initialized(&var, av[1]);
     var.t = get_player_position(var.map_copy_1);
     var.player_x = var.t[0];
     var.player_y = var.t[1];
+    freed_int(var.t);
+    freed(var.map);
+    freed(var.map_copy);
     var.mlx_ptr = mlx_init();
     if(!var.mlx_ptr)
         return(0);
@@ -107,8 +118,7 @@ int main(int ac, char **av)
     wall_map(var);
     var.map_copy_1[var.player_x][var.player_y] = '0';
     var.player_moves = 0;
-    // mlx_hook(var.win_ptr, 17, 0, kill_redcross, &var);
+    mlx_hook(var.win_ptr, 17, 0, kill_redcross, &var);
     mlx_hook(var.win_ptr, 2, 0, key_hook, &var);
-    mlx_loop_hook(var.mlx_ptr, &scor, &var);
     mlx_loop(var.mlx_ptr);
 }

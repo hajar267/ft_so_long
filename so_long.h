@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/10 12:13:03 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/10 21:42:16 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,5 +79,10 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int kill_redcross(int keycode, t_game * var);
+char	*ft_itoa(int n);
+int	neg_place(char	*str, int n);
+int	cont_int(int nmb);
+void freed(char **map);
+void freed_int(int *t);
 
 #endif
