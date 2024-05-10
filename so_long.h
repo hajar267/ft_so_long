@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/09 10:57:25 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/10 12:13:03 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,7 @@ typedef struct s_game
     void *img_ptr;
     char **allocate_map;
     char **map;
+    char **map_1;
     char **map_copy;
     char **map_copy_1;
     int x;
@@ -48,8 +49,8 @@ typedef struct s_game
    int player_x;
    int player_y;
    int player_moves;
+   int n_l;
 }t_game;
-
 
 int get_numline_map(t_game vars, char *name);
 void check_file_name(char *name);
@@ -60,15 +61,15 @@ void checker(t_game var, char *name);
 char **map_to_2d(char *name, t_game vars);
 void check_start_game(t_game vars, char *name);
 void check_file_name(char *name);
-void flood_fill_copy(char **map_copy, int y, int x, int rows, int cols);
-void check_for_E_copy(char **map_copy);
+void flood_fill_copy(t_game vars, int y, int x);
+void check_for_E_copy(t_game vars);
 int *get_Exit_position(char **map_copy);
 char **get_game_copy(t_game var);
 void flood_fill(t_game vars, int y, int x);
 void check_for_c(t_game vars);
 int *get_player_position(char **map);
 void check_for_fill(char **map, t_game vars);
-void check_for_fill_copy(char **map_copy, int rows, int cols);
+void check_for_fill_copy(char **map_copy, t_game vars);
 void wall_map(t_game var);
 void to_x_plus_1(t_game *vars);
 void to_x_minus_1(t_game *vars);
@@ -77,5 +78,6 @@ void to_y_minus_1(t_game *vars);
 void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
+int kill_redcross(int keycode, t_game * var);
 
 #endif

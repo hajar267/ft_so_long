@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:52:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/09 10:34:41 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/10 12:21:09 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,11 @@ void check_start_game(t_game vars, char *name)
     str = get_next_line(vars.fd);
     if (str[0] != '1')
     {
+        free(str);
         perror("error invalid map!!!");
         exit(0);
     }
+    free(str);
     close(vars.fd);
 }
 
@@ -72,18 +74,14 @@ void check_map_shape(t_game var, char *name)
     }
 }
 
-void check_map_content(t_game *var, char *name)
+void check_line(t_game *var, int x)
 {
-    int x;
     int y;
     int len;
 
-    x = 1;
-    while(var->rows - 1 > 0)
-    {
-        y = 1;
-        len = var->cols - 1;
-        while(len - 1 > 0)
+    y = 1;
+    len = var->cols - 1;
+    while(len - 1 > 0)
         {
             if (var->map[x][y] == 'E')
                 var->compt_E++;
@@ -99,6 +97,18 @@ void check_map_content(t_game *var, char *name)
             y++;
             len--;
         }
+}
+
+void check_map_content(t_game *var, char *name)
+{
+    int x;
+    int y;
+    int len;
+
+    x = 1;
+    while(var->rows - 1 > 0)
+    {
+        check_line(var, x);
         x++;
         var->rows--;
     }
@@ -108,3 +118,4 @@ void check_map_content(t_game *var, char *name)
             exit(0);
         }
 }
+
