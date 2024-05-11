@@ -6,11 +6,10 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/13 14:17:37 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/01/17 18:12:02 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/01/20 18:07:41 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// here bring ur ustlis functions from libft
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *str)
@@ -31,7 +30,7 @@ char	*ft_strdup(const char *s)
 	i = 0;
 	if (!s)
 		return (NULL);
-	str = malloc(ft_strlen((char *)s) +1);
+	str = malloc(ft_strlen((char *)s) + 1);
 	if (!str)
 		return (NULL);
 	while (s[i])
@@ -68,11 +67,11 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		return (NULL);
 	else if (s1 == NULL)
 		return (ft_strdup(s2));
-	else if(s2 == NULL)
+	else if (s2 == NULL)
 		return ((char *)s1);
 	str = (char *)malloc(ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1);
 	if (!str)
-		return (free(str) ,NULL);
+		return (free(str), NULL);
 	while (s1[++i])
 		str[i] = s1[i];
 	while (s2[j])
@@ -80,7 +79,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	str[i] = '\0';
 	return (free((char *)s1), str);
 }
-
 
 char	*ft_substr(char const *s, unsigned int start, size_t len)
 {

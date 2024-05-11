@@ -6,23 +6,18 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/10 15:22:32 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/10 21:47:08 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/11 14:50:56 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-void freed(char **map)
+void	freed(char **map)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while(map[i])
-        free(map[i++]);
-    free(map);
-}
-
-void freed_int(int *t)
-{
-    free(t);
+	i = 0;
+	while (map[i])
+		free(map[i++]);
+	free(map);
 }
