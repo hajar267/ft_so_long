@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:49:58 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 14:53:22 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 15:34:09 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	check_for_c(t_game vars)
 		{
 			if (vars.map[j][i] == 'c')
 			{
-				perror("Error");
+				write(1, "Error\n", 6);
 				exit(0);
 			}
 			i++;

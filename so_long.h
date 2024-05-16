@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 14:54:18 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 17:30:13 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ typedef struct s_game
 int		get_numline_map(t_game vars, char *name);
 void	check_file_name(char *name);
 void	check_map_shape(t_game var, char *name);
-void	check_map_content(t_game *var, char *name);
+void	check_map_content(t_game *var);
 void	check_map_wall(t_game var, char *name);
 void	checker(t_game var, char *name);
 char	**map_to_2d(char *name, t_game vars);
@@ -88,5 +88,7 @@ int		cont_int(int nmb);
 void	freed(char **map);
 void	state_map_wall_1(t_game *var, int l, int w);
 void	state_map_wall(t_game *var, int l, int w);
+void	fill_line(t_game vars, char *str, int y);
+void	*fill_map(t_game *adr_var);
 
 #endif

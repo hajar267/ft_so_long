@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:24:00 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 13:25:40 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 16:12:48 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	to_x_plus_1(t_game *vars)
 	if (vars->map_copy_1[vars->player_y][vars->player_x + 1] == '1')
 		return ;
 	else if (vars->map_copy_1[vars->player_y][vars->player_x + 1] == '0'
-	|| vars->map_copy_1[vars->player_y][vars->player_x + 1] == 'c')
+	|| vars->map_copy_1[vars->player_y][vars->player_x + 1] == 'C')
 	{
 		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
 		"./textures/character_0.xpm", &vars->x, &vars->y);
@@ -44,7 +44,7 @@ void	to_x_minus_1(t_game *vars)
 	if (vars->map_copy_1[vars->player_y][vars->player_x - 1] == '1')
 		return ;
 	else if (vars->map_copy_1[vars->player_y][vars->player_x - 1] == '0'
-	|| vars->map_copy_1[vars->player_y][vars->player_x - 1] == 'c')
+	|| vars->map_copy_1[vars->player_y][vars->player_x - 1] == 'C')
 	{
 		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
 		"./textures/character_0.xpm", &vars->x, &vars->y);
@@ -71,7 +71,7 @@ void	to_y_plus_1(t_game *vars)
 	if (vars->map_copy_1[vars->player_y + 1][vars->player_x] == '1')
 		return ;
 	else if (vars->map_copy_1[vars->player_y + 1][vars->player_x] == '0'
-	|| vars->map_copy_1[vars->player_y + 1][vars->player_x] == 'c')
+	|| vars->map_copy_1[vars->player_y + 1][vars->player_x] == 'C')
 	{
 		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
 		"./textures/character_0.xpm", &vars->x, &vars->y);
@@ -98,7 +98,7 @@ void	to_y_minus_1(t_game *vars)
 	if (vars->map_copy_1[vars->player_y - 1][vars->player_x] == '1')
 		return ;
 	else if (vars->map_copy_1[vars->player_y - 1][vars->player_x] == '0'
-	|| vars->map_copy_1[vars->player_y - 1][vars->player_x] == 'c')
+	|| vars->map_copy_1[vars->player_y - 1][vars->player_x] == 'C')
 	{
 		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
 		"./textures/character_0.xpm", &vars->x, &vars->y);

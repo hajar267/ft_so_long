@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:38:52 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 14:30:07 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 15:35:16 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ void	check_for_e_copy(t_game vars)
 		{
 			if (vars.map_copy[j][i] == 'c' || vars.map_copy[j][i] == 'P')
 			{
-				perror("error rest c || p!!!");
+				write(1, "Error\n", 6);
 				exit(0);
 			}
 			i++;

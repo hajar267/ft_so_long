@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:52:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 14:41:05 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 16:11:27 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	check_start_game(t_game vars, char *name)
 	if (str[0] != '1')
 	{
 		free(str);
-		perror("Error\n");
+		write(1, "Error\n", 6);
 		exit(0);
 	}
 	free(str);
@@ -40,7 +40,7 @@ void	check_map_wall(t_game var, char *name)
 	{
 		if (var.map[0][i] != '1' || var.map[var.n_l][i] != '1')
 		{
-			perror("Error\n");
+			write(1, "Error\n", 6);
 			exit(0);
 		}
 		i++;
@@ -50,7 +50,7 @@ void	check_map_wall(t_game var, char *name)
 	{
 		if (var.map[var.n_l][0] != '1' || var.map[var.j][len - 1] != '1')
 		{
-			perror("Error\n");
+			write(1, "Error\n", 6);
 			exit(0);
 		}
 		var.n_l--;
@@ -59,21 +59,21 @@ void	check_map_wall(t_game var, char *name)
 
 void	check_map_shape(t_game var, char *name)
 {
-	int	i;
-	int	j;
+	size_t	i;
+	size_t	j;
 
 	i = ft_strlen(var.map[0]);
 	j = get_numline_map(var, name);
 	if (j == i)
 	{
-		perror("Error\n");
+		write(1, "Error\n", 6);
 		exit(0);
 	}
 	while (j > 0)
 	{
 		if (i != ft_strlen(var.map[j - 1]))
 		{
-			perror("Error\n");
+			write(1, "Error\n", 6);
 			exit(0);
 		}
 		j--;
@@ -91,13 +91,13 @@ void	check_line(t_game *var, int x)
 	{
 		if (var->map[x][y] == 'E')
 			var->compt_e++;
-		else if (var->map[x][y] == 'c')
+		else if (var->map[x][y] == 'C')
 			var->compt_c++;
 		else if (var->map[x][y] == 'P')
 			var->compt_p++;
 		else if (var->map[x][y] != '0' && var->map[x][y] != '1')
 		{
-			perror("Error\n");
+			write(1, "Error\n", 6);
 			exit(0);
 		}
 		y++;
@@ -105,11 +105,9 @@ void	check_line(t_game *var, int x)
 	}
 }
 
-void	check_map_content(t_game *var, char *name)
+void	check_map_content(t_game *var)
 {
 	int	x;
-	int	y;
-	int	len;
 
 	x = 1;
 	while (var->rows - 1 > 0)
@@ -120,7 +118,7 @@ void	check_map_content(t_game *var, char *name)
 	}
 	if (var->compt_e != 1 || var->compt_p != 1 || var->compt_c < 1)
 	{
-		perror("Error\n");
+		write(1, "Error\n", 6);
 		exit(0);
 	}
 }

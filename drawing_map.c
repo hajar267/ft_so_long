@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:15:21 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 13:19:00 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 16:12:18 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	state_map_wall(t_game *var, int l, int w)
 		mlx_put_image_to_window(var->mlx_ptr, var->win_ptr, \
 		var->img_ptr, l, w);
 	}
-	else if (var->map_copy_1[var->j][var->i] == 'c')
+	else if (var->map_copy_1[var->j][var->i] == 'C')
 	{
 		var->img_ptr = mlx_xpm_file_to_image(var->mlx_ptr, \
 		"./textures/rabbit_1.xpm", &var->x, &var->y);
@@ -78,7 +78,7 @@ void	wall_map(t_game var)
 			|| var.map_copy_1[var.j][var.i] == 'P' \
 			|| var.map_copy_1[var.j][var.i] == '0' \
 			|| var.map_copy_1[var.j][var.i] == 'E' || \
-			var.map_copy_1[var.j][var.i] == 'c')
+			var.map_copy_1[var.j][var.i] == 'C')
 				state_map_wall(&var, l, w);
 			l += SIZE_L;
 			var.i++;
@@ -91,5 +91,6 @@ void	wall_map(t_game var)
 int	destroynotify(int keycode, t_game *var)
 {
 	(void)keycode;
+	(void)var;
 	exit(0);
 }

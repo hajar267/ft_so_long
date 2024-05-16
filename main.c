@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/11 14:53:59 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/16 17:45:57 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,21 @@ void	fill_line(t_game vars, char *str, int y)
 
 char	**map_to_2d(char *name, t_game vars)
 {
-	char	*str;
-
 	vars.inc = 0;
 	vars.n_l = get_numline_map(vars, name);
 	vars.fd = open(name, O_RDONLY);
+	if (vars.fd == -1)
+	{
+		write(2, "open error\n", 11);
+		exit(1);
+	}
 	vars.allocate_map = malloc(sizeof(char *) * (vars.n_l + 1));
 	if (!vars.allocate_map)
 		return (NULL);
-	while (vars.n_l > vars.inc)
+	if (fill_map(&vars) == NULL)
 	{
-		str = get_next_line(vars.fd);
-		if (!str)
-		{
-			free(str);
-			break ;
-		}
-		vars.allocate_map[vars.inc] = malloc(ft_strlen(str) + 1);
-		if (!vars.allocate_map)
-			return (NULL);
-		fill_line(vars, str, vars.inc);
-		vars.inc++;
+		write(2, "malloc error\n", 11);
+		exit(1);
 	}
 	vars.allocate_map[vars.n_l] = NULL;
 	close(vars.fd);
