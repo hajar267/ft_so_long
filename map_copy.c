@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:38:52 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 15:35:16 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 10:04:28 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char	**get_game_copy(t_game var)
 	j = 0;
 	map_copy = malloc(sizeof(char *) * (var.rows + 1));
 	if (!map_copy)
-		return (NULL);
+		exit(0);
 	while (var.map[j])
 	{
 		map_copy[j] = malloc(var.cols + 1);
 		if (!map_copy)
-			return (NULL);
+			exit(0);
 		i = 0;
 		while (var.map[j][i])
 		{

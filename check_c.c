@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:49:58 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 15:34:09 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 12:29:33 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	*get_player_position(char **map)
 	j = 0;
 	t = malloc(sizeof(int) * 2);
 	if (!t)
-		return (0);
+		ft_exit();
 	while (map[j])
 	{
 		i = 0;
@@ -68,11 +68,8 @@ void	check_for_c(t_game vars)
 		i = 0;
 		while (vars.map[j][i])
 		{
-			if (vars.map[j][i] == 'c')
-			{
-				write(1, "Error\n", 6);
-				exit(0);
-			}
+			if (vars.map[j][i] == 'C')
+				ft_exit();
 			i++;
 		}
 		j++;

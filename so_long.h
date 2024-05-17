@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 17:30:13 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 14:11:50 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,6 +89,8 @@ void	freed(char **map);
 void	state_map_wall_1(t_game *var, int l, int w);
 void	state_map_wall(t_game *var, int l, int w);
 void	fill_line(t_game vars, char *str, int y);
-void	*fill_map(t_game *adr_var);
+void	fill_map(t_game *adr_var);
+void	ft_exit(void);
+int		ft_check_c_exit(t_game *var);
 
 #endif

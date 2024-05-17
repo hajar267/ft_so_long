@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 12:52:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 16:11:27 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 12:22:09 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ void	check_start_game(t_game vars, char *name)
 	char	*str;
 
 	vars.fd = open(name, O_RDONLY);
+	if (vars.fd == -1)
+		ft_exit();
 	str = get_next_line(vars.fd);
 	if (str[0] != '1')
 	{
 		free(str);
-		write(1, "Error\n", 6);
-		exit(0);
+		close(vars.fd);
+		ft_exit();
 	}
 	free(str);
 	close(vars.fd);
@@ -36,23 +38,17 @@ void	check_map_wall(t_game var, char *name)
 	i = 0;
 	len = ft_strlen(var.map[0]);
 	var.n_l = get_numline_map(var, name) - 1;
-	while (var.map[0][i] && var.map[var.j][i])
+	while (var.map[0][i] && var.map[var.n_l][i])
 	{
 		if (var.map[0][i] != '1' || var.map[var.n_l][i] != '1')
-		{
-			write(1, "Error\n", 6);
-			exit(0);
-		}
+			ft_exit();
 		i++;
 	}
 	i = 0;
 	while (var.n_l > 0)
 	{
-		if (var.map[var.n_l][0] != '1' || var.map[var.j][len - 1] != '1')
-		{
-			write(1, "Error\n", 6);
-			exit(0);
-		}
+		if (var.map[var.n_l][0] != '1' || var.map[var.n_l][len - 1] != '1')
+			ft_exit();
 		var.n_l--;
 	}
 }
@@ -65,17 +61,11 @@ void	check_map_shape(t_game var, char *name)
 	i = ft_strlen(var.map[0]);
 	j = get_numline_map(var, name);
 	if (j == i)
-	{
-		write(1, "Error\n", 6);
-		exit(0);
-	}
+		ft_exit();
 	while (j > 0)
 	{
 		if (i != ft_strlen(var.map[j - 1]))
-		{
-			write(1, "Error\n", 6);
-			exit(0);
-		}
+			ft_exit();
 		j--;
 	}
 }
@@ -96,10 +86,7 @@ void	check_line(t_game *var, int x)
 		else if (var->map[x][y] == 'P')
 			var->compt_p++;
 		else if (var->map[x][y] != '0' && var->map[x][y] != '1')
-		{
-			write(1, "Error\n", 6);
-			exit(0);
-		}
+			ft_exit();
 		y++;
 		len--;
 	}
@@ -117,8 +104,5 @@ void	check_map_content(t_game *var)
 		var->rows--;
 	}
 	if (var->compt_e != 1 || var->compt_p != 1 || var->compt_c < 1)
-	{
-		write(1, "Error\n", 6);
-		exit(0);
-	}
+		ft_exit();
 }

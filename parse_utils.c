@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 18:53:37 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 17:18:38 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 12:07:24 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	get_numline_map(t_game vars, char *name)
 	j = 0;
 	i = 0;
 	vars.fd = open(name, O_RDONLY);
+	if (vars.fd == -1)
+		ft_exit();
 	str = get_next_line(vars.fd);
 	while (str)
 	{
@@ -28,9 +30,7 @@ int	get_numline_map(t_game vars, char *name)
 		free(str);
 		str = get_next_line(vars.fd);
 	}
-	close(vars.fd);
-	free(str);
-	return (j);
+	return (close(vars.fd), free(str), j);
 }
 
 void	checker(t_game var, char *name)
@@ -57,7 +57,7 @@ void	check_file_name(char *name)
 		i++;
 	}
 	write(1, "Error\n", 6);
-	exit(0);
+	exit(EXIT_FAILURE);
 }
 
 void	check_for_fill(char **map, t_game vars)

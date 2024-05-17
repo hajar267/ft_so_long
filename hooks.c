@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:24:00 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 16:12:48 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 14:13:29 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,12 @@ void	to_x_plus_1(t_game *vars)
 		ft_putstr_fd("\r", 1);
 	}
 	else if (vars->map_copy_1[vars->player_y][vars->player_x + 1] == 'E')
-		exit(0);
+	{
+		if (ft_check_c_exit(vars) == 1)
+			return ;
+		else
+			exit(0);
+	}
 }
 
 void	to_x_minus_1(t_game *vars)
@@ -63,7 +68,12 @@ void	to_x_minus_1(t_game *vars)
 		ft_putstr_fd("\r", 1);
 	}
 	else if (vars->map_copy_1[vars->player_y][vars->player_x - 1] == 'E')
-		exit(0);
+	{
+		if (ft_check_c_exit(vars) == 1)
+			return ;
+		else
+			exit(0);
+	}
 }
 
 void	to_y_plus_1(t_game *vars)
@@ -90,7 +100,12 @@ void	to_y_plus_1(t_game *vars)
 		ft_putstr_fd("\r", 1);
 	}
 	else if (vars->map_copy_1[vars->player_y + 1][vars->player_x] == 'E')
-		exit(0);
+	{
+		if (ft_check_c_exit(vars) == 1)
+			return ;
+		else
+			exit(0);
+	}
 }
 
 void	to_y_minus_1(t_game *vars)
@@ -117,5 +132,10 @@ void	to_y_minus_1(t_game *vars)
 		ft_putstr_fd("\r", 1);
 	}
 	else if (vars->map_copy_1[vars->player_y - 1][vars->player_x] == 'E')
-		exit(0);
+	{
+		if (ft_check_c_exit(vars) == 1)
+			return ;
+		else
+			exit(0);
+	}
 }

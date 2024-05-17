@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 17:45:57 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 12:01:12 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,18 +32,11 @@ char	**map_to_2d(char *name, t_game vars)
 	vars.n_l = get_numline_map(vars, name);
 	vars.fd = open(name, O_RDONLY);
 	if (vars.fd == -1)
-	{
-		write(2, "open error\n", 11);
-		exit(1);
-	}
+		ft_exit();
 	vars.allocate_map = malloc(sizeof(char *) * (vars.n_l + 1));
 	if (!vars.allocate_map)
-		return (NULL);
-	if (fill_map(&vars) == NULL)
-	{
-		write(2, "malloc error\n", 11);
-		exit(1);
-	}
+		ft_exit();
+	fill_map(&vars);
 	vars.allocate_map[vars.n_l] = NULL;
 	close(vars.fd);
 	return (vars.allocate_map);
@@ -77,25 +70,29 @@ void	to_initialized(t_game *var, char *name)
 	var->t = get_player_position(var->map_copy_1);
 }
 
+void wa3laleaks()
+{
+	system("leaks so_long");
+}
+
 int	main(int ac, char **av)
 {
 	t_game	var;
 
+	atexit(wa3laleaks);
+	
 	if (ac != 2)
-	{
-		ft_putstr_fd("Error", 2);
-		exit(0);
-	}
+		ft_exit();
 	check_file_name(av[1]);
 	to_initialized(&var, av[1]);
-	var.player_x = var.t[0];
-	var.player_y = var.t[1];
+	var.player_x = var.t[1];
+	var.player_y = var.t[0];
 	free(var.t);
 	freed(var.map);
 	freed(var.map_copy);
 	var.mlx_ptr = mlx_init();
 	if (!var.mlx_ptr)
-		return (0);
+		ft_exit();
 	var.win_ptr = mlx_new_window(var.mlx_ptr, SIZE_L * var.cols, \
 	SIZE_W * var.rows, "My game");
 	wall_map(var);
