@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:24:00 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/17 14:13:29 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 21:13:41 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,28 +19,14 @@ void	to_x_plus_1(t_game *vars)
 	else if (vars->map_copy_1[vars->player_y][vars->player_x + 1] == '0'
 	|| vars->map_copy_1[vars->player_y][vars->player_x + 1] == 'C')
 	{
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/character_0.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, vars->img_ptr, \
-		SIZE_L * (vars->player_x + 1), (SIZE_W * vars->player_y));
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/floor_3.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * vars->player_x, SIZE_W * vars->player_y);
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->player_x++;
-		vars->player_moves++;
-		ft_putstr_fd("move : ", 1);
-		ft_putnbr_fd(vars->player_moves, 1);
-		ft_putstr_fd("\r", 1);
+		assist_x_plus(vars);
 	}
 	else if (vars->map_copy_1[vars->player_y][vars->player_x + 1] == 'E')
 	{
-		if (ft_check_c_exit(vars) == 1)
-			return ;
+		if (vars->c <= 0)
+			exit(EXIT_FAILURE);
 		else
-			exit(0);
+			return ;
 	}
 }
 
@@ -51,28 +37,14 @@ void	to_x_minus_1(t_game *vars)
 	else if (vars->map_copy_1[vars->player_y][vars->player_x - 1] == '0'
 	|| vars->map_copy_1[vars->player_y][vars->player_x - 1] == 'C')
 	{
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/character_0.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * (vars->player_x - 1), SIZE_W * vars->player_y);
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/floor_3.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * vars->player_x, SIZE_W * vars->player_y);
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->player_x--;
-		vars->player_moves++;
-		ft_putstr_fd("move : ", 1);
-		ft_putnbr_fd(vars->player_moves, 1);
-		ft_putstr_fd("\r", 1);
+		assist_x_minus(vars);
 	}
 	else if (vars->map_copy_1[vars->player_y][vars->player_x - 1] == 'E')
 	{
-		if (ft_check_c_exit(vars) == 1)
-			return ;
+		if (vars->c <= 0)
+			exit(EXIT_FAILURE);
 		else
-			exit(0);
+			return ;
 	}
 }
 
@@ -83,28 +55,14 @@ void	to_y_plus_1(t_game *vars)
 	else if (vars->map_copy_1[vars->player_y + 1][vars->player_x] == '0'
 	|| vars->map_copy_1[vars->player_y + 1][vars->player_x] == 'C')
 	{
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/character_0.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * vars->player_x, SIZE_W * (vars->player_y + 1));
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/floor_3.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * vars->player_x, SIZE_W * vars->player_y);
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->player_y++;
-		vars->player_moves++;
-		ft_putstr_fd("move : ", 1);
-		ft_putnbr_fd(vars->player_moves, 1);
-		ft_putstr_fd("\r", 1);
+		assist_y_plus(vars);
 	}
 	else if (vars->map_copy_1[vars->player_y + 1][vars->player_x] == 'E')
 	{
-		if (ft_check_c_exit(vars) == 1)
-			return ;
+		if (vars->c <= 0)
+			exit(EXIT_FAILURE);
 		else
-			exit(0);
+			return ;
 	}
 }
 
@@ -115,27 +73,13 @@ void	to_y_minus_1(t_game *vars)
 	else if (vars->map_copy_1[vars->player_y - 1][vars->player_x] == '0'
 	|| vars->map_copy_1[vars->player_y - 1][vars->player_x] == 'C')
 	{
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/character_0.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * vars->player_x, SIZE_W * (vars->player_y - 1));
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->img_ptr = mlx_xpm_file_to_image(vars->mlx_ptr, \
-		"./textures/floor_3.xpm", &vars->x, &vars->y);
-		mlx_put_image_to_window(vars->mlx_ptr, vars->win_ptr, \
-		vars->img_ptr, SIZE_L * vars->player_x, SIZE_W * vars->player_y);
-		mlx_destroy_image(vars->mlx_ptr, vars->img_ptr);
-		vars->player_y--;
-		vars->player_moves++;
-		ft_putstr_fd("move : ", 1);
-		ft_putnbr_fd(vars->player_moves, 1);
-		ft_putstr_fd("\r", 1);
+		assist_y_minus(vars);
 	}
 	else if (vars->map_copy_1[vars->player_y - 1][vars->player_x] == 'E')
 	{
-		if (ft_check_c_exit(vars) == 1)
-			return ;
+		if (vars->c <= 0)
+			exit(EXIT_FAILURE);
 		else
-			exit(0);
+			return ;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/26 17:54:03 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/17 14:11:50 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 21:01:35 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ typedef struct s_game
 	int		inc;
 	int		i;
 	int		j;
+	int		c;
 }	t_game;
 
 int		get_numline_map(t_game vars, char *name);
@@ -82,9 +83,6 @@ void	ft_putnbr_fd(int n, int fd);
 void	ft_putstr_fd(char *s, int fd);
 void	ft_putchar_fd(char c, int fd);
 int		destroynotify(int keycode, t_game *var);
-char	*ft_itoa(int n);
-int		eg_place(char *str, int n);
-int		cont_int(int nmb);
 void	freed(char **map);
 void	state_map_wall_1(t_game *var, int l, int w);
 void	state_map_wall(t_game *var, int l, int w);
@@ -92,5 +90,10 @@ void	fill_line(t_game vars, char *str, int y);
 void	fill_map(t_game *adr_var);
 void	ft_exit(void);
 int		ft_check_c_exit(t_game *var);
+void	ft_compt_c(t_game *var);
+void	assist_x_plus(t_game *vars);
+void	assist_x_minus(t_game *vars);
+void	assist_y_minus(t_game *vars);
+void	assist_y_plus(t_game *vars);
 
 #endif

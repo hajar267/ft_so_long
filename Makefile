@@ -6,7 +6,7 @@
 #    By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/16 10:52:05 by hfiqar            #+#    #+#              #
-#    Updated: 2024/05/16 15:45:44 by hfiqar           ###   ########.fr        #
+#    Updated: 2024/05/17 20:44:23 by hfiqar           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,8 @@ get_next_line_utils \
 hooks \
 main \
 map_copy \
-parse_utils
+parse_utils \
+assist_hooks
 
 SRC = $(FILES:=.c)
 

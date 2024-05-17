@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 18:15:21 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/16 16:12:18 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 21:02:34 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,5 +92,5 @@ int	destroynotify(int keycode, t_game *var)
 {
 	(void)keycode;
 	(void)var;
-	exit(0);
+	exit(EXIT_FAILURE);
 }

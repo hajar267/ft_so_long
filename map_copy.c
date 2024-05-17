@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 11:38:52 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/17 10:04:28 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 21:02:34 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,12 @@ char	**get_game_copy(t_game var)
 	j = 0;
 	map_copy = malloc(sizeof(char *) * (var.rows + 1));
 	if (!map_copy)
-		exit(0);
+		exit(EXIT_FAILURE);
 	while (var.map[j])
 	{
 		map_copy[j] = malloc(var.cols + 1);
 		if (!map_copy)
-			exit(0);
+			exit(EXIT_FAILURE);
 		i = 0;
 		while (var.map[j][i])
 		{
@@ -94,7 +94,7 @@ void	check_for_e_copy(t_game vars)
 			if (vars.map_copy[j][i] == 'c' || vars.map_copy[j][i] == 'P')
 			{
 				write(1, "Error\n", 6);
-				exit(0);
+				exit(EXIT_FAILURE);
 			}
 			i++;
 		}

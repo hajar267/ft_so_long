@@ -6,7 +6,7 @@
 /*   By: hfiqar <hfiqar@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 10:30:06 by hfiqar            #+#    #+#             */
-/*   Updated: 2024/05/17 12:01:12 by hfiqar           ###   ########.fr       */
+/*   Updated: 2024/05/17 21:37:56 by hfiqar           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ char	**map_to_2d(char *name, t_game vars)
 
 int	key_hook(int keycode, t_game *vars)
 {
+	ft_compt_c(vars);
 	if (keycode == 124 || keycode == 2)
 		to_x_plus_1(vars);
 	else if (keycode == 123 || keycode == 0)
@@ -53,7 +54,7 @@ int	key_hook(int keycode, t_game *vars)
 	else if (keycode == 126 || keycode == 13)
 		to_y_minus_1(vars);
 	else if (keycode == 53)
-		exit(0);
+		exit(EXIT_FAILURE);
 	return (0);
 }
 
@@ -70,17 +71,10 @@ void	to_initialized(t_game *var, char *name)
 	var->t = get_player_position(var->map_copy_1);
 }
 
-void wa3laleaks()
-{
-	system("leaks so_long");
-}
-
 int	main(int ac, char **av)
 {
 	t_game	var;
 
-	atexit(wa3laleaks);
-	
 	if (ac != 2)
 		ft_exit();
 	check_file_name(av[1]);
@@ -99,6 +93,7 @@ int	main(int ac, char **av)
 	var.map_copy_1[var.player_x][var.player_y] = '0';
 	var.player_moves = 0;
 	mlx_hook(var.win_ptr, 17, 0, destroynotify, &var);
+			printf("%d\n",var.map_copy_1[6][1]);
 	mlx_hook(var.win_ptr, 2, 0, key_hook, &var);
 	mlx_loop(var.mlx_ptr);
 }
